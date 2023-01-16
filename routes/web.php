@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index', [
-        'title' => 'Home'
+        'title' => 'Beranda'
     ]);
 });
+
+Route::post('/surat', [TestController::class, 'index']);
