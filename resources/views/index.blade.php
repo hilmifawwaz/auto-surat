@@ -36,43 +36,47 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
-        <a class="card">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Surat Keterangan Penelitian</b>
-          </div>
-          <div class="card-footer" style="background-color: #186D9D; height: 20%">
-            <p class="text-center text-light">Ajukan</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3">
-        <a class="card">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Surat Keterangan Penelitian</b>
-          </div>
-          <div class="card-footer small" style="background-color: #186D9D; height: 20%">
-            <p class="text-center text-light">Ajukan</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3">
-        <a class="card">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Surat Keterangan Penelitian</b>
-          </div>
-          <div class="card-footer" style="background-color: #186D9D; height: 20%">
-            <p class="text-center text-light">Ajukan</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3">
+      <div class="col-md-3 mb-3">
         <a href="#surat" class="card" id="btnPengajuan" onclick="pengajuan()">
           <div class="card-body" style="background-color: #3C8DBC">
             <b class="text-light">Surat Keterangan Penelitian</b>
           </div>
-          <div class="card-footer" style="background-color: #186D9D; height: 20%">
-            <p class="text-center text-light">Ajukan</p>
+          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
+            Ajukan
+            <i class="bi bi-arrow-right-circle-fill"></i>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 mb-3">
+        <a href="#surat" class="card" id="btnPengajuan" onclick="pengajuan()">
+          <div class="card-body" style="background-color: #3C8DBC">
+            <b class="text-light">Surat Keterangan Penelitian</b>
+          </div>
+          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
+            Ajukan
+            <i class="bi bi-arrow-right-circle-fill"></i>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 mb-3">
+        <a href="#surat" class="card" id="btnPengajuan" onclick="pengajuan()">
+          <div class="card-body" style="background-color: #3C8DBC">
+            <b class="text-light">Surat Keterangan Penelitian</b>
+          </div>
+          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
+            Ajukan
+            <i class="bi bi-arrow-right-circle-fill"></i>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-3 mb-3">
+        <a href="#surat" class="card" id="btnPengajuan" onclick="pengajuan()">
+          <div class="card-body" style="background-color: #3C8DBC">
+            <b class="text-light">Surat Keterangan Penelitian</b>
+          </div>
+          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
+            Ajukan
+            <i class="bi bi-arrow-right-circle-fill"></i>
           </div>
         </a>
       </div>
@@ -90,7 +94,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/surat" method="POST" id="formLogin">
+        <form action="/surat" method="POST" id="formSurat">
           @csrf
           <div class="form-group col-md-12">
             <label for="nama" class="control-label" style="font-weight:bold">Nama Lengkap</label>
@@ -104,7 +108,34 @@
           <button type="submit" class="btn btn-primary mt-2" id="btnAjukan" style="background-color: #3C8DBC; font-weight:bold; width: 100%">Ajukan</button>
         </div>
       </form>
-      <button type="button" class="btn btn-primary" id="btnLogin" style="background-color: #3C8DBC; font-weight:bold; width: 100%">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- LOGIN --}}
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Login</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/surat" method="POST" id="formLogin">
+          @csrf
+          <div class="form-group col-md-12">
+            <label for="username" class="control-label" style="font-weight:bold">Username</label>
+            <input type="text" class="form-control" name="name" id="username" placeholder="Masukkan Username">
+          </div>
+          <div class="form-group col-md-12 mt-2">
+            <label for="passwd" class="control-label" style="font-weight:bold">Password</label>
+            <input type="password" class="form-control" name="password" id="passwd" placeholder="Masukkan Password">
+          </div>
+        </form>
+        <div class="col-md-12">
+          <button type="button" class="btn btn-primary" id="btnLogin" style="background-color: #3C8DBC; font-weight:bold; width: 100%" onclick="login()">Login</button>
+        </div>
       </div>
     </div>
   </div>
@@ -115,56 +146,57 @@
 <script>
   const title = $('#modalTitle');
   const modal = $('#modalData');
-  const form = $('#formLogin');
-
-  function login(){
-    $('#modalData').modal('show');
-    title.html('LOGIN');
-    $('#btnLogin').show();
-    $('#btnAjukan').hide();
-  }
+  const formSurat = $('#formSurat');
+  const modalLogin = $('#modalLogin');
+  const formLogin = $('#formLogin');
 
   function pengajuan(){
     $('#modalData').modal('show');
     title.html('Pengajuan');
-    $('#btnLogin').hide();
     $('#btnAjukan').show();
   }
 
-  // $(document).on('click', '#btnAjukan', function(){
-  //   $.ajax({
-  //     type: "POST",
-  //     url: "/surat",
-  //     data: form.serialize(),
-  //     dataType: "JSON", 
+  function login1(){
+    $('#modalLogin').modal('show');
+    formLogin[0].reset();
+  }
 
-  //     beforeSend: function(){
-  //       $('#btnAjukan').attr('disabled', true);
-  //       $('#btnAjukan').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
-  //     },
+  function login(){
+    // $.ajaxSetup({
+    //   headers:{
+    //     'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content');
+    //   }
+    // });
 
-  //     complete: function(){
-  //       $('#btnAjukan').attr('disabled', false);
-  //       $('#btnAjukan').html('Ajukan');
-  //       // window.location = '/surat';
-  //     },
-
-  //     success: function(response){
-  //       window.location = '/surat';
-  //     }
-  //   })
-  // });
-
-  $(document).on('click', '#btnLogin', function(){
     $.ajax({
       type: "POST",
-      url: "auto-surat.test/login",
-      dataType: "JSON", 
+      url: "/login",
+      data: formLogin.serialize(),
 
       beforeSend: function(){
         $('#btnLogin').attr('disabled', true);
         $('#btnLogin').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+      },
+
+      complete: function(){
+        $('#btnLogin').attr('disabled', false);
+        $('#btnLogin').html('Login');
+      },
+
+      success: function(response){
+        console.log(response);
+        if(response.status == 'success'){
+          window.location = "/admin";
+        }
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Gagal!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
       }
     })
-  })
+  }
 </script>

@@ -25,15 +25,13 @@ class TestController extends Controller
             'nik' => $nik
         ]);
 
-        $pathToSave = 'hasil23.docx';
+        $pathToSave = 'hasil-surat/hasil24.docx';
         $phpWord->saveAs($pathToSave);
 
         header('Content-Description: File Transfer');
         header('Content-Disposition: attachment; filename="' . $pathToSave . '"');
         header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessing‌​ml.document');
         readfile($pathToSave);
-
-        return readfile($pathToSave);
     }
 
     /**

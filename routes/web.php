@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,7 @@ Route::get('/', function () {
 });
 
 Route::post('/surat', [TestController::class, 'index']);
+
+Route::post('/login', [LoginController::class, 'index']);
+
+Route::get('/admin', [AdminController::class, 'index']);

@@ -9,7 +9,7 @@
   <nav class="navbar navbar-light" style="background-color: #186D9D">
     <div class="container-fluid">
       <button class="btn" style="background-color: #186D9D" disabled></button>
-      <button class="btn btn-primary d-flex" style="background-color: #3C8DBC" onclick="login()">
+      <button class="btn btn-primary d-flex" style="background-color: #3C8DBC" onclick="login1()">
         <span class="bi bi-person-fill"></span>
         LOGIN
       </button>
