@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SuratController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +21,16 @@ Route::get('/', function () {
     return view('index', [
         'title' => 'Beranda'
     ]);
-});
+})->name('index');
 
 Route::post('/surat', [TestController::class, 'index']);
 
 Route::post('/login', [LoginController::class, 'index']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth');
+Route::get('/warga', [AdminController::class, 'warga'])->middleware('auth');
+
+Route::get('/data-surat', [AdminController::class, 'surat'])->middleware('auth');
+Route::resource('/getSurat', SuratController::class);
+// Route::post('/addsurat', [SuratController::class, 'add']);

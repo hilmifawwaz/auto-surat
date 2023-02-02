@@ -186,12 +186,13 @@
       success: function(response){
         console.log(response);
         if(response.status == 'success'){
-          window.location = "/admin";
+          window.location = "/dashboard";
         }
         else{
           Swal.fire({
             icon: 'error',
             title: 'Login Gagal!',
+            text: 'Periksa kembali Username dan Password Anda!',
             showConfirmButton: false,
             timer: 1500
           })
