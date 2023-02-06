@@ -12,24 +12,14 @@
     </div>
     <div class="card-body" style="width: 100%; height: 100%">
       <div class="container-fluid">
+        @foreach ($datap as $p)
         <a href="/" class="card mt-2 text-muted">
           <div class="card-body">
-            <h5>Pengumuman 1</h5>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos vel voluptatem porro quisquam aspernatur atque doloribus totam provident! Totam, eum. Ipsa fuga laborum velit porro nobis voluptates. Dolor, minima quo.</p>
+            <h5>{{ $p->judul }}</h5>
+            <p>{{ $p->isi }}</p>
           </div>
         </a>
-        <a href="/" class="card mt-2 text-muted">
-          <div class="card-body">
-            <h5>Pengumuman 2</h5>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos vel voluptatem porro quisquam aspernatur atque doloribus totam provident! Totam, eum. Ipsa fuga laborum velit porro nobis voluptates. Dolor, minima quo.</p>
-          </div>
-        </a>
-        <a href="/" class="card mt-2 text-muted">
-          <div class="card-body">
-            <h5>Pengumuman 3</h5>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos vel voluptatem porro quisquam aspernatur atque doloribus totam provident! Totam, eum. Ipsa fuga laborum velit porro nobis voluptates. Dolor, minima quo.</p>
-          </div>
-        </a>
+        @endforeach
       </div>
     </div>
   </div>

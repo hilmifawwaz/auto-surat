@@ -23,4 +23,9 @@ class AdminController extends Controller
         $data = $surat->index();
         return view('admin.surat')->with('data', $data);
     }
+
+    public function pengumuman()
+    {
+        return view('admin.pengumuman');
+    }
 }

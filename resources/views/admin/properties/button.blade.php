@@ -6,6 +6,5 @@
   </a>
   <a href="#" data-id="{{ $data->id_surat }}" class="btn btn-danger btn-sm delete" id="btnDelete{{ $data->id_surat }}">
     <i class="bi bi-trash"></i>
-    
   </a>
 </form>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Warga;
+use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class WargaController extends Controller
+class PengumumanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,18 +15,13 @@ class WargaController extends Controller
      */
     public function index()
     {
-        $warga = new Warga;
-        $data = $warga->index();
-
+        $pengumuman = new Pengumuman;
+        $data = $pengumuman->index();
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('ttl', function ($data) {
-                return $data->tempat_lahir . ', ' . date('d-m-Y', strtotime($data->tgl_lahir));
-            })
             ->addColumn('aksi', function ($data) {
-                return view('admin.properties.btn-warga')->with('data', $data);
-            })
-            ->make(true);
+                return view('admin.properties.btn-pengumuman')->with('data', $data);
+            })->make(true);
     }
 
     /**
@@ -48,21 +43,11 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $data = [
-            'nik' => $request->nik,
-            'nama_lengkap' => $request->nama,
-            'tempat_lahir' => $request->tempat,
-            'tgl_lahir' => $request->tanggal,
-            'jk' => $request->jk,
-            'goldar' => $request->goldar,
-            'alamat' => $request->alamat,
-            'agama' => $request->agama,
-            'sp' => $request->kawin,
-            'pekerjaan' => $request->pekerjaan,
-            'kwn' => $request->kwn
+            'judul' => $request->judul,
+            'isi' => $request->isi
         ];
-        Warga::create($data);
-        $msg['status'] = 'success';
-        return response()->json($msg);
+        Pengumuman::create($data);
+        return response()->json();
     }
 
     /**
@@ -84,7 +69,7 @@ class WargaController extends Controller
      */
     public function edit($id)
     {
-        $data = Warga::where('id_warga', $id)->first();
+        $data = Pengumuman::where('id_pengumuman', $id)->first();
         return response()->json($data);
     }
 
@@ -98,19 +83,11 @@ class WargaController extends Controller
     public function update(Request $request, $id)
     {
         $data = [
-            'nik' => $request->nik,
-            'nama_lengkap' => $request->nama,
-            'tempat_lahir' => $request->tempat,
-            'tgl_lahir' => $request->tanggal,
-            'jk' => $request->jk,
-            'goldar' => $request->goldar,
-            'alamat' => $request->alamat,
-            'agama' => $request->agama,
-            'sp' => $request->kawin,
-            'pekerjaan' => $request->pekerjaan,
-            'kwn' => $request->kwn
+            'judul' => $request->judul,
+            'isi' => $request->isi
         ];
-        Warga::where('id_warga', $id)->update($data);
+        Pengumuman::where('id_pengumuman', $id)->update($data);
+
         $msg['status'] = 'success';
         return response()->json($msg);
     }
@@ -123,7 +100,7 @@ class WargaController extends Controller
      */
     public function destroy($id)
     {
-        Warga::where('id_warga', $id)->delete();
+        Pengumuman::where('id_pengumuman', $id)->delete();
         $msg['status'] = 'success';
         return response()->json($msg);
     }

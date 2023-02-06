@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\WargaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index', [
-        'title' => 'Beranda'
-    ]);
-})->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::post('/surat', [TestController::class, 'index']);
 
@@ -29,8 +28,12 @@ Route::post('/login', [LoginController::class, 'index']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth');
-Route::get('/warga', [AdminController::class, 'warga'])->middleware('auth');
 
 Route::get('/data-surat', [AdminController::class, 'surat'])->middleware('auth');
 Route::resource('/getSurat', SuratController::class);
-// Route::post('/addsurat', [SuratController::class, 'add']);
+
+Route::get('/warga', [AdminController::class, 'warga'])->middleware('auth');
+Route::resource('/getWarga', WargaController::class);
+
+Route::get('/data-pengumuman', [AdminController::class, 'pengumuman'])->middleware('auth');
+Route::resource('/getPengumuman', PengumumanController::class);

@@ -19,6 +19,12 @@
           Data Surat
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/data-pengumuman" id="btnpengumuman">
+          <span data-feather="send"></span>
+          Data Pengumuman
+        </a>
+      </li>
       <li class="nav-link">
         <form action="/logout" method="POST" class="text-left">
           @csrf
