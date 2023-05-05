@@ -78,7 +78,6 @@
     </div>
   </div>
 
-
   <script src="js/bootstrap.bundle.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
@@ -89,5 +88,6 @@
     crossorigin="anonymous"></script>
   <script src="js/dashboard.js"></script>
 </body>
+@include('admin.layout.footer')
 
 </html>

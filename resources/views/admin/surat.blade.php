@@ -35,7 +35,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="#" method="POST" id="formAdd">
+          <form action="#" method="POST" id="formAdd" enctype="multipart/form-data">
             @csrf
             <div class="form-group col-md-12">
               <label for="nama" class="control-label" style="font-weight:bold">Nama Surat</label>
@@ -110,14 +110,17 @@
   }
 
   function save(){
-    const formAdd = $('#formAdd');
+    var formAdd = $('#formAdd')[0];
     const modalAdd = $('#modalAdd');
 
     $.ajax({
       type: "POST",
-      url: "getSurat",
-      data: $('#formAdd').serialize(),
+      url: "postSurat",
+      data: new FormData(formAdd),
       dataType: "JSON",
+      contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+      processData: false,
+      cache: false,
 
       beforeSend: function(){
         $('#btnAddSurat').attr('disabled', true);
@@ -201,19 +204,19 @@
       dataType: "JSON",
       beforeSend: function(){
         $('#btnEdit' + id).attr('disabled', true);
-        $('#btnEdit' + id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Edit');
+        $('#btnEdit' + id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
       },
 
       complete: function(){
         $('#btnEdit' + id).attr('disabled', false);
-        $('#btnEdit' + id).html('<i class="bi bi-pencil-square"></i> Edit');
+        $('#btnEdit' + id).html('<i class="bi bi-pencil-square"></i>');
       },
 
       success: function(response){
         $('#modalAdd').modal('show');
         $('#nama_surat').val(response.nama_surat);
         $('#keterangan').val(response.keterangan);
-        // $('#template').html(response.template);
+        $('#template').html(response.template);
 
         $('#btnEditSurat').click(function(){
           saveedit(id);
@@ -240,12 +243,12 @@
 
           beforeSend: function(){
             $('#btnDelete' + id).attr('disabled', true);
-            $('#btnDelete' + id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Hapus');
+            $('#btnDelete' + id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
           },
 
           complete: function(){
             $('#btnDelete' + id).attr('disabled', false);
-            $('#btnDelete' + id).html('<i class="bi bi-trash"></i> Hapus');
+            $('#btnDelete' + id).html('<i class="bi bi-trash"></i>');
           },
 
           success: function(response){

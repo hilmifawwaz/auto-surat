@@ -25,7 +25,7 @@ class TestController extends Controller
             'nik' => $nik
         ]);
 
-        $pathToSave = 'hasil-surat/hasil24.docx';
+        $pathToSave = 'hasil-surat/hasil.docx';
         $phpWord->saveAs($pathToSave);
 
         header('Content-Description: File Transfer');

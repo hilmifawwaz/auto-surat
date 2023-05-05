@@ -31,6 +31,7 @@ Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth');
 
 Route::get('/data-surat', [AdminController::class, 'surat'])->middleware('auth');
 Route::resource('/getSurat', SuratController::class);
+Route::post('/postSurat', [SuratController::class, 'store']);
 
 Route::get('/warga', [AdminController::class, 'warga'])->middleware('auth');
 Route::resource('/getWarga', WargaController::class);

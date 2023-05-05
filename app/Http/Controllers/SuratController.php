@@ -26,10 +26,19 @@ class SuratController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate([
+            'template' => 'required|mimes:docx|max:2048'
+        ]);
+
+        $file = $request->file('template');
+        $fileName = $file->getClientOriginalName();
+        $file->move(public_path('template'), $fileName);
+
         $data = [
             'nama_surat' => $request->nama_surat,
             'keterangan' => $request->keterangan,
-            'template' => 'NULL',
+            'template' => $fileName,
             'status' => 'aktif',
         ];
 

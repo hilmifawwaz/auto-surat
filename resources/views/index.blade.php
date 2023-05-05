@@ -72,6 +72,7 @@
       </div>
     </div>
   </div>
+  @include('admin.layout.footer')
 
 @endsection
 
@@ -130,7 +131,6 @@
     </div>
   </div>
 </div>
-
 
 <script src="{{ asset('js/jquery.js') }}" type="text/javascript"></script>
 <script>
