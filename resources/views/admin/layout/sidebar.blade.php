@@ -29,7 +29,7 @@
         <form action="/logout" method="POST" class="text-left">
           @csrf
           <button type="submit" class="btn btn-danger">
-            <i class="bi bi-box-arrow-in-left"></i>
+            <i class="bi bi-box-arrow-left"></i>
             Logout
           </button>
         </form>

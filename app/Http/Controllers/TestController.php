@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Surat;
+use App\Models\Warga;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Http\Request;
@@ -15,17 +17,36 @@ class TestController extends Controller
      */
     public function index(Request $request)
     {
-        $nama = $request->nama;
-        $nik = $request->nik;
-        $no = 1;
-        $phpWord = new TemplateProcessor('template.docx');
+        new Warga;
+        new Surat;
+        $data_warga = Warga::where('nik', session('nik'))->first();
+        $data_surat = Surat::where('id_surat', session('id_surat'))->first();
 
+        $nama = $data_warga->nama_lengkap;
+        $nik = $data_warga->nik;
+        $tempat_lahir = $data_warga->tempat_lahir;
+        $tgl_lahir = $data_warga->tgl_lahir;
+        $gender = $data_warga->jk;
+
+        if ($gender == "L") {
+            $gender = "Laki-Laki";
+        } else {
+            $gender = 'Perempuan';
+        }
+
+        $no = 1;
+        $new_tgl_lahir = date("d-m-Y", strtotime($tgl_lahir));
+
+        $phpWord = new TemplateProcessor('template/' . $data_surat->template);
         $phpWord->setValues([
             'nama' => $nama,
-            'nik' => $nik
+            'nik' => $nik,
+            'tempat_lahir' => $tempat_lahir,
+            'tgl_lahir' => $new_tgl_lahir,
+            'gender' => $gender
         ]);
 
-        $pathToSave = 'hasil-surat/hasil.docx';
+        $pathToSave = 'hasil-surat/' . $nik . '.docx';
         $phpWord->saveAs($pathToSave);
 
         header('Content-Description: File Transfer');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportWarga;
 use App\Models\Warga;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class WargaController extends Controller
@@ -20,8 +22,8 @@ class WargaController extends Controller
 
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('ttl', function ($data) {
-                return $data->tempat_lahir . ', ' . date('d-m-Y', strtotime($data->tgl_lahir));
+            ->addColumn('tgl_lhr', function ($data) {
+                return date('d-m-Y', strtotime($data->tgl_lahir));
             })
             ->addColumn('aksi', function ($data) {
                 return view('admin.properties.btn-warga')->with('data', $data);
@@ -29,6 +31,12 @@ class WargaController extends Controller
             ->make(true);
     }
 
+    public function import()
+    {
+        Excel::import(new ImportWarga(), request()->file('import'));
+
+        return redirect()->back()->with('success', 'Data berhasil diimpor.');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,15 +58,20 @@ class WargaController extends Controller
         $data = [
             'nik' => $request->nik,
             'nama_lengkap' => $request->nama,
-            'tempat_lahir' => $request->tempat,
-            'tgl_lahir' => $request->tanggal,
-            'jk' => $request->jk,
-            'goldar' => $request->goldar,
-            'alamat' => $request->alamat,
-            'agama' => $request->agama,
-            'sp' => $request->kawin,
-            'pekerjaan' => $request->pekerjaan,
-            'kwn' => $request->kwn
+            'no_kk' => $request->tempat,
+            'dusun' => $request->tanggal,
+            'rt' => $request->jk,
+            'rw' => $request->goldar,
+            'pendidikan' => $request->alamat,
+            'pendidikan_ditempuh' => $request->agama,
+            'pekerjaan' => $request->kawin,
+            'tgl_lahir' => $request->pekerjaan,
+            'tempat_lahir' => $request->kwn,
+            'kawin',
+            'hub_keluarga',
+            'nama_ayah',
+            'nama_ibu',
+            'status'
         ];
         Warga::create($data);
         $msg['status'] = 'success';

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::post('/check', [HomeController::class, 'auth'])->name('checking');
 
 Route::post('/surat', [TestController::class, 'index']);
 
@@ -35,6 +36,7 @@ Route::post('/postSurat', [SuratController::class, 'store']);
 
 Route::get('/warga', [AdminController::class, 'warga'])->middleware('auth');
 Route::resource('/getWarga', WargaController::class);
+Route::post('/import', [WargaController::class, 'import'])->name('import');
 
 Route::get('/data-pengumuman', [AdminController::class, 'pengumuman'])->middleware('auth');
 Route::resource('/getPengumuman', PengumumanController::class);

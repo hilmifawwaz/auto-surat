@@ -12,8 +12,8 @@
         <span class="bi bi-question-circle"></span>
         Cara Penggunaan
       </button>
-      <button class="btn btn-primary d-flex" style="background-color: #3C8DBC" onclick="login1()">
-        <span class="bi bi-person-fill"></span>
+      <button class="btn btn-primary" style="background-color: #3C8DBC" onclick="login1()">
+        <span class="bi bi-box-arrow-in-right"></span>
         LOGIN
       </button>
     </div>

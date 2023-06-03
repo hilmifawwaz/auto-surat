@@ -13,15 +13,20 @@ class Warga extends Model
     protected $fillable = [
         'nik',
         'nama_lengkap',
-        'tempat_lahir',
-        'tgl_lahir',
-        'jk',
-        'goldar',
-        'alamat',
-        'agama',
-        'sp',
+        'no_kk',
+        'dusun',
+        'rt',
+        'rw',
+        'pendidikan',
+        'pendidikan_ditempuh',
         'pekerjaan',
-        'kwn'
+        'tgl_lahir',
+        'tempat_lahir',
+        'kawin',
+        'hub_keluarga',
+        'nama_ayah',
+        'nama_ibu',
+        'status'
     ];
 
     public function index()

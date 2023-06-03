@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
+use App\Models\Surat;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,10 +18,14 @@ class HomeController extends Controller
     {
         $pengumuman = new Pengumuman;
         $data_pengumuman = $pengumuman->index();
+        $surat = new Surat;
+        $data_surat = $surat->index();
 
         return view('index', [
             'title' => 'Beranda'
-        ])->with('datap', $data_pengumuman);
+        ])
+            ->with('datap', $data_pengumuman)
+            ->with('datas', $data_surat);
     }
 
     /**
@@ -86,5 +92,27 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function auth(Request $request)
+    {
+        $nama = $request->nama;
+        $nik = $request->nik;
+        $id_surat = $request->id_surat;
+
+        $ada_nama = Warga::where('nama_lengkap', $nama)->first();
+        $ada_nik = Warga::where('nik', $nik)->first();
+
+        if ($ada_nama && $ada_nik) {
+            session()->put('nama', $nama);
+            session()->put('nik', $nik);
+            session()->put('id_surat', $id_surat);
+
+            // $data = session()->all();
+            // dd($data);
+            return response()->json(['exists' => true]);
+        } else {
+            return response()->json(['exists' => false]);
+        }
     }
 }

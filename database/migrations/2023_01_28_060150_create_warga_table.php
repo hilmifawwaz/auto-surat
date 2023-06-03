@@ -17,15 +17,20 @@ return new class extends Migration
             $table->id('id_warga');
             $table->bigInteger('nik');
             $table->string('nama_lengkap');
-            $table->string('tempat_lahir');
-            $table->date('tgl_lahir');
-            $table->enum('jk', ['L', 'P']);
-            $table->enum('goldar', ['A', 'B', 'AB', 'O']);
-            $table->string('alamat');
-            $table->string('agama');
-            $table->enum('sp', ['Belum Kawin', 'Kawin']);
+            $table->bigInteger('no_kk');
+            $table->string('dusun');
+            $table->integer('rw');
+            $table->integer('rt');
+            $table->string('pendidikan');
+            $table->string('pendidikan_ditempuh');
             $table->string('pekerjaan');
-            $table->enum('kwn', ['WNI', 'WNA']);
+            $table->date('tgl_lahir');
+            $table->string('tempat_lahir');
+            $table->string('kawin');
+            $table->string('hub_keluarga');
+            $table->string('nama_ayah');
+            $table->string('nama_ibu');
+            $table->string('status');
             $table->timestamps();
         });
     }
