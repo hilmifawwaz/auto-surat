@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\WargaController;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::post('/check', [HomeController::class, 'auth'])->name('checking');
+Route::get('/get-session', [SessionController::class, 'index'])->name('session_data');
 
 Route::post('/surat', [TestController::class, 'index']);
 

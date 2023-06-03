@@ -24,15 +24,20 @@ class TestController extends Controller
 
         $nama = $data_warga->nama_lengkap;
         $nik = $data_warga->nik;
+        $no_kk = $data_warga->no_kk;
+        $dusun = $data_warga->dusun;
+        $rt = $data_warga->rt;
+        $rw = $data_warga->rw;
+        $pendidikan = $data_warga->pendidikan;
+        $pend_ditempuh = $data_warga->pendidikan_ditempuh;
+        $pekerjaan = $data_warga->pekerjaan;
         $tempat_lahir = $data_warga->tempat_lahir;
         $tgl_lahir = $data_warga->tgl_lahir;
-        $gender = $data_warga->jk;
-
-        if ($gender == "L") {
-            $gender = "Laki-Laki";
-        } else {
-            $gender = 'Perempuan';
-        }
+        $kawin = $data_warga->kawin;
+        $hub_keluarga = $data_warga->hub_keluarga;
+        $nama_ayah = $data_warga->nama_ayah;
+        $nama_ibu = $data_warga->nama_ibu;
+        $status = $data_warga->status;
 
         $no = 1;
         $new_tgl_lahir = date("d-m-Y", strtotime($tgl_lahir));
@@ -41,9 +46,20 @@ class TestController extends Controller
         $phpWord->setValues([
             'nama' => $nama,
             'nik' => $nik,
+            'no_kk' => $no_kk,
+            'dusun' => $dusun,
+            'rt' => $rt,
+            'rw' => $rw,
+            'pendidikan' => $pendidikan,
+            'pendidikan_ditempuh' => $pend_ditempuh,
+            'pekerjaan' => $pekerjaan,
             'tempat_lahir' => $tempat_lahir,
             'tgl_lahir' => $new_tgl_lahir,
-            'gender' => $gender
+            'kawin' => $kawin,
+            'hub_keluarga' => $hub_keluarga,
+            'nama_ayah' => $nama_ayah,
+            'nama_ibu' => $nama_ibu,
+            'status' => $status
         ]);
 
         $pathToSave = 'hasil-surat/' . $nik . '.docx';

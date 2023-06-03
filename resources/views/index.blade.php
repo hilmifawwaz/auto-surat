@@ -109,13 +109,13 @@
               <tr>
                 <th>Nama Lengkap</th>
                 <td>
-                  <p id="nLengkap">{{ session()->get('nama') }}</p>
+                  <p id="nLengkap"></p>
                 </td>
               </tr>
               <tr>
                 <th>NIK</th>
                 <td>
-                  <p id="nikk">{{ session()->get('nik') }}</p>
+                  <p id="nikk"></p>
                 </td>
               </tr>
               <tr>
@@ -222,19 +222,21 @@
 
       success: function(response){
         if(response.exists){
+          $.ajax({
+            type: "GET",
+            url: "/get-session",
+            dataType: "JSON",
+
+            success: function(response){
+              $('#nLengkap').html(response.nama);
+              $('#nikk').html(response.nik);
+            }
+          })
+          
           $('#modalData').modal('hide');
           $('#modalPengajuan').modal('show');
-          // $.ajax({
-          //   type: "GET",
-          //   url: "getSurat/" + id + "/edit",
-          //   dataType: "JSON",
+          
 
-          //   success: function(response){
-          //     $('#nLengkap').html({{ session()->get('nama') }});
-          //     $('#nikk').html({{ session()->get('nik') }});
-          //     $('#nLengkap').html({{ session()->get('nama') }});
-          //   }
-          // })
         } else{
           Swal.fire({
             icon: 'error',
