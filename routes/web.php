@@ -3,11 +3,15 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengantarKKController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\PermohonanKTPController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\SuratController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TutorialController;
 use App\Http\Controllers\WargaController;
+use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +46,12 @@ Route::post('/import', [WargaController::class, 'import'])->name('import');
 
 Route::get('/data-pengumuman', [AdminController::class, 'pengumuman'])->middleware('auth');
 Route::resource('/getPengumuman', PengumumanController::class);
+
+Route::get('/data-wilayah', [AdminController::class, 'wilayah'])->middleware('auth');
+Route::resource('/get-wilayah', WilayahController::class);
+
+Route::get('/how-to', [TutorialController::class, 'index']);
+Route::get('/permohonan-ktp', [PermohonanKTPController::class, 'index']);
+Route::get('/pengantar-kk', [PengantarKKController::class, 'index']);
+Route::get('/data-warga/{id}', [PengantarKKController::class, 'getDataWarga']);
+Route::get('/anggota-keluarga/{id}', [PengantarKKController::class, 'getAnggotaKeluarga']);

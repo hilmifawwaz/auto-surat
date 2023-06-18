@@ -8,10 +8,14 @@
   </nav>
   <nav class="navbar navbar-light" style="background-color: #186D9D">
     <div class="container-fluid">
-      <button class="btn btn-primary" style="background-color: #3C8DBC">
+      <a href="/how-to" class="btn btn-primary" id="btnTutor" style="background-color: #3C8DBC">
         <span class="bi bi-question-circle"></span>
         Cara Penggunaan
-      </button>
+      </a>
+      <a href="/" class="btn btn-primary" id="btnBack" style="background-color: #3C8DBC" style="display: none">
+        <i class="bi bi-arrow-left-circle"></i>
+        Kembali
+      </a>
       <button class="btn btn-primary" style="background-color: #3C8DBC" onclick="login1()">
         <span class="bi bi-box-arrow-in-right"></span>
         LOGIN

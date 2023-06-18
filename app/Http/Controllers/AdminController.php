@@ -28,4 +28,9 @@ class AdminController extends Controller
     {
         return view('admin.pengumuman');
     }
+
+    public function wilayah()
+    {
+        return view('admin.wilayah');
+    }
 }

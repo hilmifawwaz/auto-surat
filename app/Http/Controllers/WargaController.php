@@ -58,21 +58,22 @@ class WargaController extends Controller
         $data = [
             'nik' => $request->nik,
             'nama_lengkap' => $request->nama,
-            'no_kk' => $request->tempat,
-            'dusun' => $request->tanggal,
-            'rt' => $request->jk,
-            'rw' => $request->goldar,
-            'pendidikan' => $request->alamat,
-            'pendidikan_ditempuh' => $request->agama,
-            'pekerjaan' => $request->kawin,
-            'tgl_lahir' => $request->pekerjaan,
-            'tempat_lahir' => $request->kwn,
-            'kawin',
-            'hub_keluarga',
-            'nama_ayah',
-            'nama_ibu',
-            'status'
+            'no_kk' => $request->no_kk,
+            'dusun' => $request->dusun,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
+            'pendidikan' => $request->pend_terakhir,
+            'pendidikan_ditempuh' => $request->pendidikan_skrg,
+            'pekerjaan' => $request->pekerjaan,
+            'tgl_lahir' => $request->tgl_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
+            'kawin' => $request->kawin,
+            'hub_keluarga' => $request->hub_keluarga,
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'status' => $request->status,
         ];
+        // dd($data);
         Warga::create($data);
         $msg['status'] = 'success';
         return response()->json($msg);
@@ -113,15 +114,20 @@ class WargaController extends Controller
         $data = [
             'nik' => $request->nik,
             'nama_lengkap' => $request->nama,
-            'tempat_lahir' => $request->tempat,
-            'tgl_lahir' => $request->tanggal,
-            'jk' => $request->jk,
-            'goldar' => $request->goldar,
-            'alamat' => $request->alamat,
-            'agama' => $request->agama,
-            'sp' => $request->kawin,
+            'no_kk' => $request->no_kk,
+            'dusun' => $request->dusun,
+            'rt' => $request->rt,
+            'rw' => $request->rw,
+            'pendidikan' => $request->pend_terakhir,
+            'pendidikan_ditempuh' => $request->pendidikan_skrg,
             'pekerjaan' => $request->pekerjaan,
-            'kwn' => $request->kwn
+            'tgl_lahir' => $request->tgl_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
+            'kawin' => $request->kawin,
+            'hub_keluarga' => $request->hub_keluarga,
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'status' => $request->status,
         ];
         Warga::where('id_warga', $id)->update($data);
         $msg['status'] = 'success';
