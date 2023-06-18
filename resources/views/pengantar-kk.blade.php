@@ -61,7 +61,7 @@
       <input type="text" class="form-control" name="telepon" id="telepon" placeholder="Tuliskan Nomor Telepon Anda">
     </div>
     <p class="fs-3 mt-2">Daftar Anggota Keluarga</p>
-    <div class="form-group mt-2">
+    <div class="form-group">
       <label for="alasan" class="fw-bold">Alasan Permohonan</label>
       <select name="alasan" id="alasan" class="form-control">
         <option value="0" selected disabled>Pilih Alsan Permohonan</option>  
