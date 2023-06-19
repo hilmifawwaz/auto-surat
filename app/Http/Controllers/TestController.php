@@ -20,7 +20,7 @@ class TestController extends Controller
         new Warga;
         new Surat;
         $data_warga = Warga::where('nik', session('nik'))->first();
-        $data_surat = Surat::where('id_surat', session('id_surat'))->first();
+        $data_surat = Surat::where('id_surat', $request->id_surat)->first();
 
         $nama = $data_warga->nama_lengkap;
         $nik = $data_warga->nik;
@@ -38,8 +38,53 @@ class TestController extends Controller
         $nama_ayah = $data_warga->nama_ayah;
         $nama_ibu = $data_warga->nama_ibu;
         $status = $data_warga->status;
+        $no_telp = $request->telepon;
+        $alamat = $request->alamat;
+        $alasan = $request->alasan;
+        $jumlah_anggota = $request->jumlah;
+        $nik_anggota1 = $request->keluarga1;
+        $nik_anggota2 = $request->keluarga2;
+        $nik_anggota3 = $request->keluarga3;
+        $nik_anggota4 = $request->keluarga4;
+        $nik_anggota5 = $request->keluarga5;
+        $nik_anggota6 = $request->keluarga6;
+        $nik_anggota7 = $request->keluarga7;
+        $nik_anggota8 = $request->keluarga8;
+        $nik_anggota9 = $request->keluarga9;
+        $nik_anggota10 = $request->keluarga10;
+        $tanggal = date('d-m-Y');
 
-        $no = 1;
+        if ($nik_anggota1 != NULL) {
+            $nama_anggota1 = Warga::where('nik', $nik_anggota1)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota2 != NULL) {
+            $nama_anggota2 = Warga::where('nik', $nik_anggota2)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota3 != NULL) {
+            $nama_anggota3 = Warga::where('nik', $nik_anggota3)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota4 != NULL) {
+            $nama_anggota4 = Warga::where('nik', $nik_anggota4)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota5 != NULL) {
+            $nama_anggota5 = Warga::where('nik', $nik_anggota5)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota6 != NULL) {
+            $nama_anggota6 = Warga::where('nik', $nik_anggota6)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota7 != NULL) {
+            $nama_anggota7 = Warga::where('nik', $nik_anggota7)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota8 != NULL) {
+            $nama_anggota8 = Warga::where('nik', $nik_anggota8)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota9 != NULL) {
+            $nama_anggota9 = Warga::where('nik', $nik_anggota9)->pluck('nama_lengkap')->first();
+        }
+        if ($nik_anggota10 != NULL) {
+            $nama_anggota10 = Warga::where('nik', $nik_anggota10)->pluck('nama_lengkap')->first();
+        }
+
         $new_tgl_lahir = date("d-m-Y", strtotime($tgl_lahir));
 
         $phpWord = new TemplateProcessor('template/' . $data_surat->template);
@@ -59,16 +104,43 @@ class TestController extends Controller
             'hub_keluarga' => $hub_keluarga,
             'nama_ayah' => $nama_ayah,
             'nama_ibu' => $nama_ibu,
-            'status' => $status
+            'status' => $status,
+            'a' => $alasan,
+            'b' => $jumlah_anggota,
+            'no_telp' => $no_telp,
+            'alamat' => $alamat,
+            'nik_anggota1' => $nik_anggota1 ?? ' ',
+            'nik_anggota2' => $nik_anggota2 ?? ' ',
+            'nik_anggota3' => $nik_anggota3 ?? ' ',
+            'nik_anggota4' => $nik_anggota4 ?? ' ',
+            'nik_anggota5' => $nik_anggota5 ?? ' ',
+            'nik_anggota6' => $nik_anggota6 ?? ' ',
+            'nik_anggota7' => $nik_anggota7 ?? ' ',
+            'nik_anggota8' => $nik_anggota8 ?? ' ',
+            'nik_anggota9' => $nik_anggota9 ?? ' ',
+            'nik_anggota10' => $nik_anggota10 ?? ' ',
+            'nama_anggota1' => $nama_anggota1 ?? ' ',
+            'nama_anggota2' => $nama_anggota2 ?? ' ',
+            'nama_anggota3' => $nama_anggota3 ?? ' ',
+            'nama_anggota4' => $nama_anggota4 ?? ' ',
+            'nama_anggota5' => $nama_anggota5 ?? ' ',
+            'nama_anggota6' => $nama_anggota6 ?? ' ',
+            'nama_anggota7' => $nama_anggota7 ?? ' ',
+            'nama_anggota8' => $nama_anggota8 ?? ' ',
+            'nama_anggota9' => $nama_anggota9 ?? ' ',
+            'nama_anggota10' => $nama_anggota10 ?? ' ',
+            'tanggal' => $tanggal
         ]);
 
         $pathToSave = 'hasil-surat/' . $nik . '.docx';
+        $fileName = $data_surat->nama_surat . '-' . $nik . '.docx';
         $phpWord->saveAs($pathToSave);
 
         header('Content-Description: File Transfer');
-        header('Content-Disposition: attachment; filename="' . $pathToSave . '"');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
         header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessing‌​ml.document');
         readfile($pathToSave);
+        header("Location: /");
     }
 
     /**

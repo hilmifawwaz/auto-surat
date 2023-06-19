@@ -5,12 +5,13 @@
   <div class="text-center mt-3">
     <p class="fw-bold fs-2">Formulir Pengantar KK</p>
   </div>
-  <form action="#" method="POST" id="formData">
+  <form action="/surat" method="POST" id="formData" enctype="multipart/form-data">
     @csrf
     <p class="fw-bold fs-3">Data Diri</p>
     <div class="form-group">
       <label for="nama" class="control-label" style="font-weight:bold">Nama Lengkap</label>
       <input type="text" class="form-control" name="nama" id="nama" placeholder="Tuliskan Nama Anda" readonly>
+      <input type="hidden" name="id_surat" id="id_surat" readonly>
     </div>
     <div class="form-group mt-2">
       <label for="nik" class="control-label fw-bold">NIK</label>
@@ -76,75 +77,146 @@
     </div>
     <div class="form-group mt-2">
       <label for="anggota" class="fw-bold">Daftar Anggota Keluarga</label>
-      <select name="keluarga1" id="keluarga1" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">1</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga1" id="keluarga1" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""> </label>
-      <select name="keluarga2" id="keluarga2" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">2</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga2" id="keluarga2" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga3" id="keluarga3" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">3</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga3" id="keluarga3" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga4" id="keluarga4" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">4</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga4" id="keluarga4" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga5" id="keluarga5" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">5</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga5" id="keluarga5" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga6" id="keluarga6" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">6</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga6" id="keluarga6" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga7" id="keluarga7" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">7</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga7" id="keluarga7" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga8" id="keluarga8" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">8</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga8" id="keluarga8" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga9" id="keluarga9" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">9</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga9" id="keluarga9" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="form-group mt-2">
-      <label for=""></label>
-      <select name="keluarga10" id="keluarga10" class="form-control keluarga">
-        <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
-      </select> 
-      <small>*kosongkan jika tidak perlu</small>
+      <div class="row">
+        <div class="col-md-1">
+          <p class="fw-bold">10</p>
+        </div>
+        <div class="col-md-11">
+          <select name="keluarga10" id="keluarga10" class="form-control keluarga">
+            <option value="0" selected disabled>Pilih Anggota Keluarga</option>  
+          </select> 
+          <small>*kosongkan jika tidak perlu</small>
+        </div>
+      </div>
     </div>
+
     <div class="col-md-12">
-      <button type="button" class="btn btn-primary" id="btnLogin" style="background-color: #3C8DBC; font-weight:bold; width: 100%">Buat</button>
+      <button type="submit" class="btn btn-primary" id="btnSubmit" style="background-color: #3C8DBC; font-weight:bold; width: 100%">Buat</button>
     </div>
   </form>
 </div>
@@ -164,6 +236,7 @@
       success: function(response){
         $('#nama').val(response.nama);
         $('#nik').val(response.nik);
+        $('#id_surat').val(response.id_surat);
 
         warga(response.nik);
       }

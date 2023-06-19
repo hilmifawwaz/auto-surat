@@ -52,50 +52,6 @@
         </a>
       </div>
       @endforeach
-      <div class="col-md-3 mb-3">
-        <a href="permohonan-ktp" class="card tombol-surat" id="btnPengajuan">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Formulir Permohonan KTP</b>
-          </div>
-          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
-            Ajukan
-            <i class="bi bi-arrow-right-circle-fill"></i>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3 mb-3">
-        <a href="#surat" class="card tombol-surat" id="btnPengajuan">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Formulir Pindah Antar Kecamatan</b>
-          </div>
-          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
-            Ajukan
-            <i class="bi bi-arrow-right-circle-fill"></i>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3 mb-3">
-        <a href="#surat" class="card tombol-surat" id="btnPengajuan">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Formulir Pindah Dalam Kecamatan</b>
-          </div>
-          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
-            Ajukan
-            <i class="bi bi-arrow-right-circle-fill"></i>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3 mb-3">
-        <a href="#surat" class="card tombol-surat" id="btnPengajuan">
-          <div class="card-body" style="background-color: #3C8DBC">
-            <b class="text-light">Formulir Pembuatan KK</b>
-          </div>
-          <div class="card-footer text-center text-light" style="background-color: #186D9D; height: 20%">
-            Ajukan
-            <i class="bi bi-arrow-right-circle-fill"></i>
-          </div>
-        </a>
-      </div>
     </div>
   </div>
   {{-- @include('admin.layout.footer') --}}
@@ -269,6 +225,13 @@
         if(response.exists){
           if(id_surat == 1){
             window.location = "/pengantar-kk"
+          } else if(id_surat == 2){
+            window.location = "/permohonan-ktp"
+          } else if(id_surat == 3){
+            window.location = "/dalam-kecamatan"
+          }
+          else {
+            window.location = "/develop"
           }
           $.ajax({
             type: "GET",

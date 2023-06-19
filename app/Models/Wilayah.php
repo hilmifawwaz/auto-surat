@@ -22,7 +22,7 @@ class Wilayah extends Model
 
     public function index()
     {
-        $data = DB::table('wilayah')->get();
+        $data = DB::table('wilayah')->where('provinsi', 'Daerah Istimewa Yogyakarta')->get();
         return $data;
     }
 }

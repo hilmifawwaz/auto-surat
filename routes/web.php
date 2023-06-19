@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DalamKecamatanController;
+use App\Http\Controllers\DevelopingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengantarKKController;
@@ -55,3 +57,7 @@ Route::get('/permohonan-ktp', [PermohonanKTPController::class, 'index']);
 Route::get('/pengantar-kk', [PengantarKKController::class, 'index']);
 Route::get('/data-warga/{id}', [PengantarKKController::class, 'getDataWarga']);
 Route::get('/anggota-keluarga/{id}', [PengantarKKController::class, 'getAnggotaKeluarga']);
+
+Route::get('/develop', [DevelopingController::class, 'index']);
+
+Route::get('/dalam-kecamatan', [DalamKecamatanController::class, 'index']);
