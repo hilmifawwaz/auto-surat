@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengumuman;
-use App\Models\Surat;
-use App\Models\Warga;
+use App\Models\AuditLog;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
-class HomeController extends Controller
+class AuditLogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +15,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pengumuman = new Pengumuman;
-        $data_pengumuman = $pengumuman->index();
-        $surat = new Surat;
-        $data_surat = $surat->index();
+        $riwayat = new AuditLog;
+        $data = $riwayat->index();
 
-        return view('index', [
-            'title' => 'Beranda'
-        ])
-            ->with('datap', $data_pengumuman)
-            ->with('datas', $data_surat);
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('tanggal1', function ($data) {
+                return date('d-m-Y', strtotime($data->tanggal));
+            })
+            ->make(true);
     }
 
     /**
@@ -92,30 +90,5 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function auth(Request $request)
-    {
-        $nama = $request->nama;
-        $nik = $request->nik;
-        $id_surat = $request->id_surat;
-
-        $ada_nama = Warga::where('nama_lengkap', $nama)->first();
-        $ada_nik = Warga::where('nik', $nik)->first();
-
-        $ada = Warga::where('nama_lengkap', $nama)->where('nik', $nik)->first();
-
-        if ($ada != NULL) {
-            session()->put('nama', $ada->nama_lengkap);
-            session()->put('nik', $ada->nik);
-            session()->put('id_surat', $id_surat);
-            session()->put('id_warga', $ada->id_warga);
-
-            // $data = session()->all();
-            // dd($data);
-            return response()->json(['exists' => true]);
-        } else if ($ada == NULL) {
-            return response()->json(['exists' => false]);
-        }
     }
 }

@@ -2,7 +2,7 @@
 @section('main-content')
   <div class="container">
     <div class="text-center mt-3">
-      <p class="fw-bold fs-2">Formulir Keterangan Pindah Dalam Kecamatan</p>
+      <p class="fw-bold fs-2">Formulir Keterangan Pindah Antar Kecamatan</p>
     </div>
     <form action="/surat" method="POST" id="formData" enctype="multipart/form-data">
       @csrf
@@ -69,40 +69,51 @@
       {{-- ALAMAT BARU --}}
       <p class="fw-bold fs-3 mt-2">Alamat Baru</p>
       <div class="form-group">
-        <label for="alamat" class="fw-bold">Alamat</label>
-        <input type="text" class="form-control" name="alamat_2" id="alamat_2" placeholder="Tuliskan Alamat Baru Anda">
-      </div>
-      <div class="form-group mt-2">
-        <label for="rt" class="fw-bold">RT</label>
-        <input type="text" class="form-control" name="rt_2" id="rt_2" placeholder="Tuliskan RT Tempat Tinggal Anda" >
-      </div>
-      <div class="form-group mt-2">
-        <label for="rw" class="fw-bold">RW</label>
-        <input type="text" class="form-control" name="rw_2" id="rw_2" placeholder="Tuliskan RW Tempat Tinggal Anda" >
-      </div>
-      <div class="form-group mt-2">
-        <label for="dusun" class="fw-bold">Dusun</label>
-        <input type="text" class="form-control" name="dusun_2" id="dusun_2" placeholder="Tuliskan Dusun Tempat Tinggal Anda" >
-      </div>
-      <div class="form-group mt-2">
-        <label for="kelurahan" class="fw-bold">Kelurahan</label>
-        <input type="text" class="form-control" name="kelurahan_2" id="kelurahan_2" placeholder="Tuliskan Kelurahan Tempat Tinggal Anda">
-      </div>
-      <div class="form-group mt-2">
-        <label for="kecamatan" class="fw-bold">Kecamatan</label>
-        <input type="text" class="form-control" name="kecamatan" id="kecamatan" placeholder="Tuliskan Kecamatan Tempat Tinggal Anda" value="Berbah" readonly>
+        <label for="provinsi" class="fw-bold">Provinsi</label>
+        <select name="provinsi" id="provinsi" class="select2 form-control" style="width: 100%">
+          <option value="0" selected disabled>Pilih Provinsi</option>
+          @foreach ($prov as $p)
+            <option value="{{ $p->provinsi }}">{{ $p->provinsi }}</option>
+          @endforeach
+        </select>
       </div>
       <div class="form-group mt-2">
         <label for="kota" class="fw-bold">Kabupaten/Kota</label>
-        <input type="text" class="form-control" name="kota" id="kota" placeholder="Tuliskan Kabupaten/Kota Tempat Tinggal Anda" value="Sleman" readonly>
+        <select name="kota_2" id="kota_2" class="form-control select2" disabled>
+          <option value="0" selected disabled>Pilih Kabupaten/Kota</option>
+        </select>
       </div>
       <div class="form-group mt-2">
-        <label for="provinsi" class="fw-bold">Provinsi</label>
-        <input type="text" class="form-control" name="propinsi" id="propinsi" placeholder="Tuliskan Provinsi Tempat Tinggal Anda" value="Daerah Istimewa Yogyakarta" readonly>
+        <label for="kecamatan" class="fw-bold">Kecamatan</label>
+        <select name="kecamatan_2" id="kecamatan_2" class="form-control select2" disabled>
+          <option value="0" selected disabled>Pilih Kecamatan</option>
+        </select>
+      </div>
+      <div class="form-group mt-2">
+        <label for="kelurahan" class="fw-bold">Kelurahan</label>
+        <select name="kelurahan_2" id="kelurahan_2" class="form-control select2" disabled>
+          <option value="0" selected disabled>Pilih Kelurahan</option>
+        </select>
+      </div>
+      <div class="form-group mt-2">
+        <label for="dusun" class="fw-bold">Dusun</label>
+        <input type="text" class="form-control" name="dusun_2" id="dusun_2" placeholder="Tuliskan Dusun Tempat Tinggal Anda" disabled>
+      </div>
+      <div class="form-group mt-2">
+        <label for="rt" class="fw-bold">RT</label>
+        <input type="text" class="form-control" name="rt_2" id="rt_2" placeholder="Tuliskan RT Tempat Tinggal Anda" disabled>
+      </div>
+      <div class="form-group mt-2">
+        <label for="rw" class="fw-bold">RW</label>
+        <input type="text" class="form-control" name="rw_2" id="rw_2" placeholder="Tuliskan RW Tempat Tinggal Anda" disabled>
       </div>
       <div class="form-group mt-2">
         <label for="kode_pos" class="fw-bold">Kode Pos</label>
-        <input type="text" class="form-control" name="kode_pos" id="kode_pos" placeholder="Tuliskan Kode Pos Tempat Tinggal Anda ">
+        <input type="text" class="form-control" name="kode_pos" id="kode_pos_2" placeholder="Tuliskan Kode Pos Tempat Tinggal Anda" disabled>
+      </div>
+      <div class="form-group mt-2">
+        <label for="alamat" class="fw-bold">Alamat Lengkap</label>
+        <input type="text" class="form-control" name="alamat_2" id="alamat_2" placeholder="Tuliskan Alamat Baru Anda" disabled>
       </div>
       {{-- INFORMASI TAMBAHAN --}}
       <p class="fw-bold fs-3 mt-2">Informasi Tambahan</p>
@@ -244,6 +255,10 @@
     $('#btnTutor').hide();
     $('#btnLogin').hide();
     $('#btnBack').show();
+    // $('#kota_2').attr('disabled', true);
+    $('.select2').select2({
+      theme: 'bootstrap-5'
+    });
 
     $.ajax({
       type: "GET",
@@ -262,6 +277,62 @@
         }
       }
     })
+
+    $('#provinsi').change(function(){
+      const val = $(this).val();
+      $.ajax({
+        url: "/get-kabupaten",
+        dataType: "JSON",
+        data: {provinsi: val},
+        success: function(data) {
+          $('#kota_2').attr('disabled', false);
+          $('#kota_2').empty();
+          $.each(data, function(key, value) {
+              $('#kota_2').append('<option value="' + value.kabupaten + '">' + value.kabupaten + '</option>');
+          });
+          $('#kota_2').trigger('change');
+        }
+      })
+    });
+
+    $('#kota_2').change(function(){
+      const val = $(this).val();
+      $.ajax({
+        url: "/get-kecamatan",
+        dataType: "JSON",
+        data: {kota: val},
+        success: function(data){
+          $('#kecamatan_2').attr('disabled', false);
+          $('#kecamatan_2').empty();
+          $.each(data, function(key, value) {
+              $('#kecamatan_2').append('<option value="' + value.kecamatan + '">' + value.kecamatan + '</option>');
+          });
+          $('#kecamatan_2').trigger('change');
+        }
+      })
+    });
+
+    $('#kecamatan_2').change(function(){
+      const val = $(this).val();
+      $.ajax({
+        url: "/get-kelurahan",
+        dataType: "JSON",
+        data: {kecamatan: val},
+        success: function(data){
+          $('#kelurahan_2').attr('disabled', false);
+          $('#dusun_2').attr('disabled', false);
+          $('#rt_2').attr('disabled', false);
+          $('#rw_2').attr('disabled', false);
+          $('#kode_pos_2').attr('disabled', false);
+          $('#alamat_2').attr('disabled', false);
+          $('#kelurahan_2').empty();
+          $.each(data, function(key, value) {
+              $('#kelurahan_2').append('<option value="' + value.kelurahan + '">' + value.kelurahan + '</option>');
+          });
+          $('#kelurahan_2').trigger('change');
+        }
+      })
+    })
   })
 
   function warga(id){
@@ -278,8 +349,9 @@
           $('#rw').val(response.rw);
           $('#dusun').val(response.dusun);
           $('#alamat').val(response.dusun + ' RT ' + response.rt + ' RW ' + response.rw + ', Tegaltirto, Berbah, Sleman');
+
+          kepala_keluarga(response.no_kk);
           anggota(response.no_kk);
-          kepala_keluarga(response.no_kk)
         }
       })
     } else {

@@ -227,6 +227,7 @@
   $(document).ready(function(){
     $('#btnTutor').hide();
     $('#btnBack').show();
+    $('#btnLogin').hide();
 
     $.ajax({
       type: "GET",
@@ -234,31 +235,39 @@
       dataType: "JSON",
 
       success: function(response){
-        $('#nama').val(response.nama);
-        $('#nik').val(response.nik);
-        $('#id_surat').val(response.id_surat);
+        if(response > 0){
+          $('#nama').val(response.nama);
+          $('#nik').val(response.nik);
+          $('#id_surat').val(response.id_surat);
 
-        warga(response.nik);
+          warga(response.nik);
+        } else {
+          window.location = "/"
+        }
       }
     })
   })
 
   function warga(id){
-    $.ajax({
-      type: "GET",
-      url: "/data-warga/" + id,
-      dataType: "JSON",
+    if(id > 0){
+      $.ajax({
+        type: "GET",
+        url: "/data-warga/" + id,
+        dataType: "JSON",
 
-      success: function(response){
-        console.log(response)
-        $('#no_kk').val(response.no_kk);
-        $('#rt').val(response.rt);
-        $('#rw').val(response.rw);
-        $('#dusun').val(response.dusun);
-        $('#alamat').val(response.dusun + ' RT ' + response.rt + ' RW ' + response.rw + ', Tegaltirto, Berbah, Sleman');
-        anggota(response.no_kk);
-      }
-    })
+        success: function(response){
+          // console.log(response)
+          $('#no_kk').val(response.no_kk);
+          $('#rt').val(response.rt);
+          $('#rw').val(response.rw);
+          $('#dusun').val(response.dusun);
+          $('#alamat').val(response.dusun + ' RT ' + response.rt + ' RW ' + response.rw + ', Tegaltirto, Berbah, Sleman');
+          anggota(response.no_kk);
+        }
+      })
+    } else {
+      window.location = "/"
+    }
   }
 
   function anggota(id){

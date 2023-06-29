@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AntarKecamatanController;
+use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\DalamKecamatanController;
 use App\Http\Controllers\DevelopingController;
 use App\Http\Controllers\HomeController;
@@ -37,6 +39,7 @@ Route::post('/login', [LoginController::class, 'index']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth');
+Route::resource('/get-riwayat', AuditLogController::class);
 
 Route::get('/data-surat', [AdminController::class, 'surat'])->middleware('auth');
 Route::resource('/getSurat', SuratController::class);
@@ -61,3 +64,9 @@ Route::get('/anggota-keluarga/{id}', [PengantarKKController::class, 'getAnggotaK
 Route::get('/develop', [DevelopingController::class, 'index']);
 
 Route::get('/dalam-kecamatan', [DalamKecamatanController::class, 'index']);
+Route::get('/kepala-keluarga/{id}', [DalamKecamatanController::class, 'kepala_keluarga']);
+
+Route::get('/antar-kecamatan', [AntarKecamatanController::class, 'index']);
+Route::get('/get-kabupaten', [AntarKecamatanController::class, 'get_kabupaten']);
+Route::get('/get-kecamatan', [AntarKecamatanController::class, 'get_kecamatan']);
+Route::get('/get-kelurahan', [AntarKecamatanController::class, 'get_kelurahan']);

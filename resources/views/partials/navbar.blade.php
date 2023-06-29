@@ -16,7 +16,7 @@
         <i class="bi bi-arrow-left-circle"></i>
         Kembali
       </a>
-      <button class="btn btn-primary" style="background-color: #3C8DBC" onclick="login1()">
+      <button class="btn btn-primary" style="background-color: #3C8DBC" onclick="login1()" id="btnLogin">
         <span class="bi bi-box-arrow-in-right"></span>
         LOGIN
       </button>

@@ -25,4 +25,16 @@ class Wilayah extends Model
         $data = DB::table('wilayah')->where('provinsi', 'Daerah Istimewa Yogyakarta')->get();
         return $data;
     }
+
+    public function all_wilayah()
+    {
+        $data = DB::table('wilayah')->get();
+        return $data;
+    }
+
+    public function provinsi()
+    {
+        $data = DB::table('wilayah')->select('provinsi')->groupBy('provinsi')->get();
+        return $data;
+    }
 }

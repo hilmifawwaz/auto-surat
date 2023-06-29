@@ -229,6 +229,8 @@
             window.location = "/permohonan-ktp"
           } else if(id_surat == 3){
             window.location = "/dalam-kecamatan"
+          } else if(id_surat == 4){
+            window.location = "/antar-kecamatan"
           }
           else {
             window.location = "/develop"

@@ -2,7 +2,7 @@
 @section('admin-content')
   <h3>Riwayat Pengajuan</h3>
   <div class="table-responsive">
-    <table class="table table-striped table-sm" id="tabledashboard">
+    <table class="table table-striped table-sm" id="tabledashboard" style="width: 100%">
       <thead>
         <tr>
           <th class="text-center">No.</th>
@@ -28,6 +28,29 @@
   $(document).ready( function () {
     $('#page-title').html('Dashboard');
     $('#btndashboard').addClass('active')
-    $('#tabledashboard').DataTable();
+    $('#tabledashboard').DataTable({
+      "responsive": true,
+      "processing": true,
+      "serverside": true,
+      "ajax": {
+        "url": "/get-riwayat",
+        "type": "GET"
+      },
+      "columns": [
+        {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+        {data: 'nik', name: "NIK"},
+        {data: 'nama_lengkap', name: 'Nama Lengkap'},
+        {data: 'nama_surat', name: 'Nama Surat'},
+        {data: 'keperluan', name: 'Keperluan'},
+        {data: 'tanggal1', name: 'Tanggal'},
+        {data: 'jam', name:'jam'}
+      ],
+      "columnDefs":[
+        {"targets": [0], "className": "text-center"}
+      ],
+      "language": {
+        "processing": '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
+      }
+    });
   });
 </script>

@@ -173,7 +173,7 @@
         "type": "GET",
       },
       "columns": [
-        {data: 'DT_RowIndex', nama: 'DR_RowIndex', orderable: false},
+        {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false},
         {data: 'nik', name: 'NIK'},
         {data: 'nama_lengkap', name: 'Nama Lengkap'},
         {data: 'no_kk', name: 'No KK'},

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditLog;
 use App\Models\Surat;
 use App\Models\Warga;
 use PhpOffice\PhpWord\IOFactory;
@@ -40,8 +41,23 @@ class TestController extends Controller
         $status = $data_warga->status;
         $no_telp = $request->telepon;
         $alamat = $request->alamat;
-        $alasan = $request->alasan;
-        $jumlah_anggota = $request->jumlah;
+        $alasan = $request->alasan; //$a
+        $jumlah_anggota = $request->jumlah; //$b
+        $c = $request->alasan_pindah;
+        $d = $request->jenis;
+        $e = $request->status_tidak_pindah;
+        $f = $request->status_pindah;
+        $alamat_2 = $request->alamat_2;
+        $rt_2 = $request->rt_2;
+        $rw_2 = $request->rw_2;
+        $dusun_2 = $request->dusun_2;
+        $kelurahan_2 = $request->kelurahan_2;
+        $kecamatan_2 = $request->kecamatan_2;
+        $kota_2 = $request->kota_2;
+        $provinsi_2 = $request->provinsi;
+        $no_telp_2 = $request->telepon_2;
+        $kepala_keluarga = $request->kepala_keluarga;
+        $kode_pos = $request->kode_pos;
         $nik_anggota1 = $request->keluarga1;
         $nik_anggota2 = $request->keluarga2;
         $nik_anggota3 = $request->keluarga3;
@@ -107,8 +123,22 @@ class TestController extends Controller
             'status' => $status,
             'a' => $alasan,
             'b' => $jumlah_anggota,
-            'no_telp' => $no_telp,
+            'c' => $c,
+            'd' => $d,
+            'e' => $e,
+            'f' => $f,
             'alamat' => $alamat,
+            'kepala_keluarga' => $kepala_keluarga,
+            'alamat_2' => $alamat_2,
+            'rt_2' => $rt_2,
+            'rw_2' => $rw_2,
+            'dusun_2' => $dusun_2,
+            'kelurahan_2' => $kelurahan_2,
+            'no_telp' => $no_telp,
+            'kode_pos' => $kode_pos,
+            'kecamatan_2' => $kecamatan_2,
+            'kota_2' => $kota_2,
+            'provinsi_2' => $provinsi_2,
             'nik_anggota1' => $nik_anggota1 ?? ' ',
             'nik_anggota2' => $nik_anggota2 ?? ' ',
             'nik_anggota3' => $nik_anggota3 ?? ' ',
@@ -129,8 +159,19 @@ class TestController extends Controller
             'nama_anggota8' => $nama_anggota8 ?? ' ',
             'nama_anggota9' => $nama_anggota9 ?? ' ',
             'nama_anggota10' => $nama_anggota10 ?? ' ',
-            'tanggal' => $tanggal
+            'tanggal' => $tanggal,
         ]);
+
+        // INPUT AUDIT LOG
+        $data = [
+            'id_warga' => session('id_warga'),
+            'id_surat' => session('id_surat'),
+            'keperluan' => '-',
+            'tanggal' => date('Y-m-d'),
+            'jam' => date('H:i:s'),
+        ];
+        AuditLog::create($data);
+
 
         $pathToSave = 'hasil-surat/' . $nik . '.docx';
         $fileName = $data_surat->nama_surat . '-' . $nik . '.docx';

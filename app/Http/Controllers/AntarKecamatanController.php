@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengumuman;
-use App\Models\Surat;
 use App\Models\Warga;
+use App\Models\Wilayah;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class AntarKecamatanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +15,33 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pengumuman = new Pengumuman;
-        $data_pengumuman = $pengumuman->index();
-        $surat = new Surat;
-        $data_surat = $surat->index();
+        $wilayah = new Wilayah;
+        $provinsi = $wilayah->provinsi();
 
-        return view('index', [
-            'title' => 'Beranda'
-        ])
-            ->with('datap', $data_pengumuman)
-            ->with('datas', $data_surat);
+        return view('antar-kecamatan', [
+            'title' => 'Antar Kecamatan'
+        ])->with('prov', $provinsi);
+    }
+
+    public function get_kabupaten(Request $request)
+    {
+        $data = $request->input('provinsi');
+        $kabupaten = Wilayah::select('kabupaten')->groupBy('kabupaten')->where('provinsi', $data)->get();
+        return response()->json($kabupaten);
+    }
+
+    public function get_kecamatan(Request $request)
+    {
+        $data = $request->input('kota');
+        $kecamatan = Wilayah::select('kecamatan')->groupBy('kecamatan')->where('kabupaten', $data)->get();
+        return response()->json($kecamatan);
+    }
+
+    public function get_kelurahan(Request $request)
+    {
+        $data = $request->input('kecamatan');
+        $kelurahan = Wilayah::select('kelurahan')->where('kecamatan', $data)->get();
+        return response()->json($kelurahan);
     }
 
     /**
@@ -92,30 +108,5 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function auth(Request $request)
-    {
-        $nama = $request->nama;
-        $nik = $request->nik;
-        $id_surat = $request->id_surat;
-
-        $ada_nama = Warga::where('nama_lengkap', $nama)->first();
-        $ada_nik = Warga::where('nik', $nik)->first();
-
-        $ada = Warga::where('nama_lengkap', $nama)->where('nik', $nik)->first();
-
-        if ($ada != NULL) {
-            session()->put('nama', $ada->nama_lengkap);
-            session()->put('nik', $ada->nik);
-            session()->put('id_surat', $id_surat);
-            session()->put('id_warga', $ada->id_warga);
-
-            // $data = session()->all();
-            // dd($data);
-            return response()->json(['exists' => true]);
-        } else if ($ada == NULL) {
-            return response()->json(['exists' => false]);
-        }
     }
 }

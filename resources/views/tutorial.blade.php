@@ -5,6 +5,9 @@
     <div class="text-center mt-3">
       <p class="fw-bold fs-2">Petunjuk Penggunaan</p>
     </div>
+    <div class="mb-3">
+      <embed src="tutorial/tutor.pdf" type="application/pdf" width="100%" height="100%">
+    </div>
   </div>
 @endsection
 
@@ -13,5 +16,7 @@
   $(document).ready(function(){
     $('#btnTutor').hide();
     $('#btnBack').show();
+    $('#btnLogin').hide();
+
   })
 </script>

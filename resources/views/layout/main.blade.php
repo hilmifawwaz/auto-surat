@@ -14,6 +14,10 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href='{{ asset('css/font.css') }}' rel='stylesheet'>
     <link href="css/footers.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <!-- Or for RTL support -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
     <title>{{ $title }}</title>
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
   </head>
@@ -24,7 +28,7 @@
     <div class="container-fluid">
       @yield('main-content')
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </body>
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

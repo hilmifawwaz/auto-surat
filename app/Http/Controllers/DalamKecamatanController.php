@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warga;
 use Illuminate\Http\Request;
 
 class DalamKecamatanController extends Controller
@@ -14,6 +15,13 @@ class DalamKecamatanController extends Controller
     public function index()
     {
         return view('dalam-kecamatan', ['title' => 'Pindah Dalam Kecamatan']);
+    }
+
+    public function kepala_keluarga($id)
+    {
+        new Warga;
+        $data = Warga::where('no_kk', $id)->where('hub_keluarga', 'KEPALA KELUARGA')->pluck('nama_lengkap')->first();
+        return response()->json($data);
     }
 
     /**
