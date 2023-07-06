@@ -14,7 +14,9 @@ class Pengumuman extends Model
 
     public function index()
     {
-        $data = DB::table('pengumuman')->get();
+        $data = DB::table('pengumuman')
+            ->orderBy('created_at', 'DESC')
+            ->get();
         return $data;
     }
 }

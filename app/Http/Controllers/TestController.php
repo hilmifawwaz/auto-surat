@@ -103,6 +103,56 @@ class TestController extends Controller
 
         $new_tgl_lahir = date("d-m-Y", strtotime($tgl_lahir));
 
+        // $validatedData = $request->validate([
+        //     'nama' => 'required',
+        //     'nik' => 'required',
+        //     'alamat' => 'required',
+        //     'alasan' => 'required',
+        //     'jumlah' => 'required',
+        //     'alasan_pindah' => 'required',
+        //     'jenis' => 'required',
+        //     'status_tidak_pindah' => 'required',
+        //     'status_pindah' => 'required',
+        //     'alamat_2' => 'required',
+        //     'rt_2' => 'required',
+        //     'rw_2' => 'required',
+        //     'dusun_2' => 'required',
+        //     'kelurahan_2' => 'required',
+        //     'kecamatan_2' => 'required',
+        //     'kota_2' => 'required',
+        //     'provinsi' => 'required',
+        //     'kepala_keluarga' => 'required',
+        //     'kode_pos' => 'required',
+        //     'keluarga1' => 'required'
+        // ], [
+        //     'nama_lengkap.required' => 'Nama Lengkap Wajib Diisi',
+        //     'nik.required' => 'NIK Wajib Diisi',
+        //     'alamat.required' => 'Alamat Wajib Diisi',
+        //     'alasan.required' => 'Alasan Permohonan Wajib Diisi',
+        //     'jumlah.required' => 'Jumlah Keluarga Wajib Diisi',
+        //     'alasan_pindah.required' => 'Alasan Kepindahan Wajib Diisi',
+        //     'jenis.required' => 'Jenis Kepindahan Wajib Diisi',
+        //     'status_tidak_pindah.required' => 'Status KK Bagi yang Tidak Pindah Wajib Diisi',
+        //     'status_pindah.required' => 'Status KK Bagi yang Pindah Wajib Diisi',
+        //     'alamat_2.required' => 'Alamat Tujuan Pindah Wajib Diisi',
+        //     'rt_2.required' => 'No. RT Tujuan Pindah Wajib Diisi',
+        //     'rw_2.required' => 'No. RW Tujuan Pindah Wajib Diisi',
+        //     'dusun_2.required' => 'Nama Dusun Tujuan Pindah Wajib Diisi',
+        //     'kelurahan_2.required' => 'Kelurahan Tujuan Pindah Wajib Diisi',
+        //     'kecamatan_2.required' => 'Kecamatan Tujuan Pindah Wajib Diisi',
+        //     'kota_2.required' => 'Kabupaten/Kota Tujuan Pindah Wajib Diisi',
+        //     'provinsi.required' => 'Provinsi Tujuan Pindah Wajib Diisi',
+        //     'kepala_keluarga.required' => 'Nama Kepala Keluarga Wajib Diisi',
+        //     'kode_pos.required' => 'Kode Pos Tujuan Pindah Wajib Diisi',
+        //     'keluarga1.required' => 'Anggota Keluarga Wajib Diisi'
+        // ]);
+
+        // if ($validatedData) {
+
+        // } else {
+        //     return redirect()->back()->withErrors($validatedData)->withInput();
+        // }
+
         $phpWord = new TemplateProcessor('template/' . $data_surat->template);
         $phpWord->setValues([
             'nama' => $nama,
@@ -135,6 +185,7 @@ class TestController extends Controller
             'dusun_2' => $dusun_2,
             'kelurahan_2' => $kelurahan_2,
             'no_telp' => $no_telp,
+            'no_telp_2' => $no_telp_2,
             'kode_pos' => $kode_pos,
             'kecamatan_2' => $kecamatan_2,
             'kota_2' => $kota_2,
@@ -181,7 +232,7 @@ class TestController extends Controller
         header('Content-Disposition: attachment; filename="' . $fileName . '"');
         header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessing‌​ml.document');
         readfile($pathToSave);
-        header("Location: /");
+        return redirect()->route('/');
     }
 
     /**

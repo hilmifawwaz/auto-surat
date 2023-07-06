@@ -35,6 +35,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="alert alert-danger d-none">
+            <ul class="message">
+            </ul>
+          </div>
           <form action="#" method="POST" id="formAdd" enctype="multipart/form-data">
             @csrf
             <div class="form-group col-md-12">
@@ -102,7 +106,7 @@
   function addsurat(){
     const modalAdd = $('#modalAdd');
     const formAdd = $('#formAdd');
-    
+    $('.alert-danger').addClass('d-none');
     modalAdd.modal('show');
     $('#btnEditSurat').hide();
     $('#btnAddSurat').show();
@@ -133,7 +137,7 @@
       },
 
       success: function(response){
-        if(response.status = 'success'){
+        if(response.success){
           Swal.fire({
             icon: 'success',
             title: 'Data Berhasil Ditambahkan!',
@@ -143,11 +147,10 @@
           modalAdd.modal('hide');
           $('#tablesurat').DataTable().ajax.reload();
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Data Gagal Ditambahkan!',
-            showConfirmButton: false,
-            timer: 1500
+          $('.message').empty();
+          $('.alert-danger').removeClass('d-none');
+          $.each(response.error, function(key,value){
+            $('.message').append("<li>" + value + "</li>")
           });
         }
       }
@@ -256,6 +259,86 @@
             Swal.fire({
             icon: 'success',
             title: 'Data Berhasil Dihapus',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          }
+        });
+      }
+    });
+  })
+
+  $(document).on('click', '.nonaktif', function(){
+    const id = $(this).data('id');
+    Swal.fire({
+      title: 'Aktifkan Surat Ini?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Ya',
+      cancelButtonText: `Tidak`,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        $.ajax({
+          type: "PUT",
+          url: "/activate/" + id,
+          data: $("#form-button").serialize(),
+          dataType: "JSON",
+
+          beforeSend: function(){
+            $('#btn-nonaktif' + id).attr('disabled', true);
+            $('#btn-nonaktif' + id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+          },
+
+          complete: function(){
+            $('#btn-nonaktif' + id).attr('disabled', false);
+            $('#btn-nonaktif' + id).html('<b>Nonaktif</b>');
+          },
+
+          success: function(response){
+            $('#tablesurat').DataTable().ajax.reload();
+            Swal.fire({
+            icon: 'success',
+            title: 'Surat Berhasil Diaktifkan',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          }
+        });
+      }
+    });
+  })
+
+  $(document).on('click', '.aktif', function(){
+    const id = $(this).data('id');
+    Swal.fire({
+      title: 'Nonktifkan Surat Ini?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Ya',
+      cancelButtonText: `Tidak`,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        $.ajax({
+          type: "PUT",
+          url: "/deactivate/" + id,
+          data: $("#form-button").serialize(),
+          dataType: "JSON",
+
+          beforeSend: function(){
+            $('#btn-aktif' + id).attr('disabled', true);
+            $('#btn-aktif' + id).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+          },
+
+          complete: function(){
+            $('#btn-aktif' + id).attr('disabled', false);
+            $('#btn-aktif' + id).html('<b>Aktif</b>');
+          },
+
+          success: function(response){
+            $('#tablesurat').DataTable().ajax.reload();
+            Swal.fire({
+            icon: 'success',
+            title: 'Surat Berhasil Dinonaktifkan',
             showConfirmButton: false,
             timer: 1500
           });

@@ -12,7 +12,7 @@
         <span class="bi bi-question-circle"></span>
         Cara Penggunaan
       </a>
-      <a href="/" class="btn btn-primary" id="btnBack" style="background-color: #3C8DBC" style="display: none">
+      <a href="/" type="button" class="btn btn-primary" id="btnBack" style="background-color: #3C8DBC" style="display: none">
         <i class="bi bi-arrow-left-circle"></i>
         Kembali
       </a>
@@ -24,4 +24,16 @@
   </nav>
 </header>
 
+{{-- <script>
+  document.getElementById('btnBack').addEventListener('click', function() {
+  // Kirim permintaan ke route untuk menghapus session
+    fetch('/back')
+        .then(function(response) {
+      if (response.ok) {
+          // Refresh halaman setelah session dihapus
+          window.location = '/'
+      }
+    });
+  });
+</script> --}}
 {{-- <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> --}}

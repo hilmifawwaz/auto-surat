@@ -33,6 +33,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="alert alert-danger d-none">
+            <ul class="message">
+            </ul>
+          </div>
           <form action="#" method="POST" id="formAdd">
             @csrf
             <div class="form-group col-md-12">
@@ -123,7 +127,7 @@
       },
 
       success: function(response){
-        if(response.status = 'success'){
+        if(response.success){
           Swal.fire({
             icon: 'success',
             title: 'Data Berhasil Ditambahkan!',
@@ -133,11 +137,10 @@
           modalAdd.modal('hide');
           $('#tablepengumuman').DataTable().ajax.reload();
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Data Gagal Ditambahkan!',
-            showConfirmButton: false,
-            timer: 1500
+          $('.message').empty();
+          $('.alert-danger').removeClass('d-none');
+          $.each(response.error, function(key,value){
+            $('.message').append("<li>" + value + "</li>")
           });
         }
       }
@@ -152,17 +155,17 @@
       dataType: "JSON",
       
       beforeSend: function(){
-        $('#btnEditSurat').attr('disabled', true);
-        $('#btnEditSurat').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+        $('#btnEditPengumuman').attr('disabled', true);
+        $('#btnEditPengumuman').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
       },
 
       complete: function(){
-        $('#btnEditSurat').attr('disabled', false);
-        $('#btnEditSurat').html('Simpan');
+        $('#btnEditPengumuman').attr('disabled', false);
+        $('#btnEditPengumuman').html('Simpan');
       },
 
       success: function(response){
-        if(response.status = 'success'){
+        if(response.success){
           $('#tablepengumuman').DataTable().ajax.reload();
           Swal.fire({
             icon: 'success',
@@ -173,11 +176,10 @@
           $('#modalAdd').modal('hide');
           $('#tablepengumuman').DataTable().ajax.reload();
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Data Gagal Ditambahkan!',
-            showConfirmButton: false,
-            timer: 1500
+          $('.message').empty();
+          $('.alert-danger').removeClass('d-none');
+          $.each(response.error, function(key,value){
+            $('.message').append("<li>" + value + "</li>")
           });
         }
       }
@@ -207,8 +209,9 @@
         $('#judul').val(response.judul);
         $('#isi').val(response.isi);
         // $('#template').html(response.template);
+        $('.alert-danger').addClass('d-none');
 
-        $('#btnEditSurat').click(function(){
+        $('#btnEditPengumuman').click(function(){
           saveedit(id);
         })
       }

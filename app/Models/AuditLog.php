@@ -23,6 +23,7 @@ class AuditLog extends Model
         $data = DB::table('audit_log')
             ->leftJoin('warga', 'audit_log.id_warga', '=', 'warga.id_warga')
             ->leftJoin('surat', 'audit_log.id_surat', '=', 'surat.id_surat')
+            ->orderBy('tanggal', 'DESC')
             ->get();
         return $data;
     }

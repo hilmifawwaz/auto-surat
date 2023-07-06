@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class PengumumanController extends Controller
@@ -42,12 +43,24 @@ class PengumumanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'judul' => $request->judul,
-            'isi' => $request->isi
-        ];
-        Pengumuman::create($data);
-        return response()->json();
+        $validatedData = Validator::make($request->all(), [
+            'judul' => 'required',
+            'isi' => 'required'
+        ], [
+            'judul.required' => 'Judul Pengumuman Wajib Diisi',
+            'isi.required' => 'Isi Pengumuman Wajib Diisi'
+        ]);
+
+        if ($validatedData->fails()) {
+            return response()->json(['error' => $validatedData->errors()]);
+        } else {
+            $data = [
+                'judul' => $request->judul,
+                'isi' => $request->isi
+            ];
+            Pengumuman::create($data);
+            return response()->json(['success' => 'Data berhasil disimpan']);
+        }
     }
 
     /**
@@ -82,14 +95,24 @@ class PengumumanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = [
-            'judul' => $request->judul,
-            'isi' => $request->isi
-        ];
-        Pengumuman::where('id_pengumuman', $id)->update($data);
+        $validatedData = Validator::make($request->all(), [
+            'judul' => 'required',
+            'isi' => 'required'
+        ], [
+            'judul.required' => 'Judul Pengumuman Wajib Diisi',
+            'isi.required' => 'Isi Pengumuman Wajib Diisi'
+        ]);
 
-        $msg['status'] = 'success';
-        return response()->json($msg);
+        if ($validatedData->fails()) {
+            return response()->json(['error' => $validatedData->errors()]);
+        } else {
+            $data = [
+                'judul' => $request->judul,
+                'isi' => $request->isi
+            ];
+            Pengumuman::where('id_pengumuman', $id)->update($data);
+            return response()->json(['success' => 'Data berhasil disimpan']);
+        }
     }
 
     /**

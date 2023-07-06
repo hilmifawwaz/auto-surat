@@ -235,15 +235,11 @@
       dataType: "JSON",
 
       success: function(response){
-        if(response > 0){
-          $('#nama').val(response.nama);
-          $('#nik').val(response.nik);
-          $('#id_surat').val(response.id_surat);
+        $('#nama').val(response.nama);
+        $('#nik').val(response.nik);
+        $('#id_surat').val(response.id_surat);
 
-          warga(response.nik);
-        } else {
-          window.location = "/"
-        }
+        warga(response.nik);
       }
     })
   })

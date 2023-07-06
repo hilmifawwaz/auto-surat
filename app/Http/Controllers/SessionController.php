@@ -19,6 +19,12 @@ class SessionController extends Controller
         return response()->json($data);
     }
 
+    public function back()
+    {
+        Session::flush();
+        return redirect()->route('index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

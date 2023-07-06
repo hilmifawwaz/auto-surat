@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::post('/check', [HomeController::class, 'auth'])->name('checking');
 Route::get('/get-session', [SessionController::class, 'index'])->name('session_data');
+Route::get('/back', [SessionController::class, 'back'])->name('back');
 
 Route::post('/surat', [TestController::class, 'index']);
 
@@ -44,6 +45,8 @@ Route::resource('/get-riwayat', AuditLogController::class);
 Route::get('/data-surat', [AdminController::class, 'surat'])->middleware('auth');
 Route::resource('/getSurat', SuratController::class);
 Route::post('/postSurat', [SuratController::class, 'store']);
+Route::put('/activate/{id}', [SuratController::class, 'aktif']);
+Route::put('/deactivate/{id}', [SuratController::class, 'nonaktif']);
 
 Route::get('/warga', [AdminController::class, 'warga'])->middleware('auth');
 Route::resource('/getWarga', WargaController::class);

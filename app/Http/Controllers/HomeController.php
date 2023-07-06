@@ -6,6 +6,7 @@ use App\Models\Pengumuman;
 use App\Models\Surat;
 use App\Models\Warga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -21,11 +22,16 @@ class HomeController extends Controller
         $surat = new Surat;
         $data_surat = $surat->index();
 
+        // Session::forget('nama', 'nik', 'id_surat', 'id_warga');
         return view('index', [
             'title' => 'Beranda'
         ])
             ->with('datap', $data_pengumuman)
-            ->with('datas', $data_surat);
+            ->with('datas', $data_surat)
+            ->with(Session::forget('nama'))
+            ->with(Session::forget('nik'))
+            ->with(Session::forget('id_surat'))
+            ->with(Session::forget('id_warga'));
     }
 
     /**
