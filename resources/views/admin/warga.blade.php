@@ -1,134 +1,164 @@
 @extends('admin.layout.main')
 @section('admin-content')
-<div class="row">
-  <div class="col-md-3">
-    <button type="button" class="btn btn-primary mb-3" id="btnplus" onclick="add()">
-      <span class="bi bi-plus"></span>
-      Tambah
-    </button>
-    <button type="button" class="btn btn-success mb-3" id="btnexcel" onclick="excel()">
-      <i class="bi bi-file-earmark-excel"></i>
-      Import Excel
-    </button>
+
+<div class="index">
+  <div class="row">
+    <div class="col-md-3">
+      <button type="button" class="btn btn-primary mb-3" id="btnplus" onclick="add()">
+        <span class="bi bi-plus"></span>
+        Tambah
+      </button>
+      <button type="button" class="btn btn-success mb-3" id="btnexcel" onclick="excel()">
+        <i class="bi bi-file-earmark-excel"></i>
+        Import Excel
+      </button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered" id="tablewarga" style="width: 100%">
+      <thead>
+        <tr>
+          <th class="text-center">No.</th>
+          <th class="text-center">NIK</th>
+          <th class="text-center">Nama Lengkap</th>
+          <th class="text-center">No. KK</th>
+          <th class="text-center">Dusun</th>
+          <th class="text-center">RT</th>
+          <th class="text-center">RW</th>
+          <th class="text-center">Pendidikan Terakhir</th>
+          <th class="text-center">Pendidikan Ditempuh</th>
+          <th class="text-center">Pekerjaan</th>
+          <th class="text-center">Tanggal Lahir</th>
+          <th class="text-center">Tempat Lahir</th>
+          <th class="text-center">Kawin</th>
+          <th class="text-center">Hubungan Keluarga</th>
+          <th class="text-center">Nama Ayah</th>
+          <th class="text-center">Nama Ibu</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 </div>
-<div class="table-responsive">
-  <table class="table table-striped table-bordered" id="tablewarga" style="width: 100%">
-    <thead>
-      <tr>
-        <th class="text-center">No.</th>
-        <th class="text-center">NIK</th>
-        <th class="text-center">Nama Lengkap</th>
-        <th class="text-center">No. KK</th>
-        <th class="text-center">Dusun</th>
-        <th class="text-center">RT</th>
-        <th class="text-center">RW</th>
-        <th class="text-center">Pendidikan Terakhir</th>
-        <th class="text-center">Pendidikan Ditempuh</th>
-        <th class="text-center">Pekerjaan</th>
-        <th class="text-center">Tanggal Lahir</th>
-        <th class="text-center">Tempat Lahir</th>
-        <th class="text-center">Kawin</th>
-        <th class="text-center">Hubungan Keluarga</th>
-        <th class="text-center">Nama Ayah</th>
-        <th class="text-center">Nama Ibu</th>
-        <th class="text-center">Status</th>
-        <th class="text-center">Aksi</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-</div>
-
 {{-- ADD WARGA --}}
-<div class="modal fade" id="modalAdd" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle">Tambah Warga</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="#" method="POST" id="formAdd">
-          @csrf
-          <div class="form-group col-md-12">
-            <label for="nik" class="control-label" style="font-weight:bold">NIK</label>
-            <input type="text" class="form-control" name="nik" id="nik" placeholder="Masukkan NIK">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="nama" class="control-label" style="font-weight:bold">Nama Lengkap</label>
-            <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama Lengkap">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="no_kk" class="control-label" style="font-weight:bold">Nomor KK</label>
-            <input type="text" class="form-control" name="no_kk" id="no_kk" placeholder="Masukkan Nomor Kartu Keluarga">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="dusun" class="control-label" style="font-weight:bold">Dusun</label>
-            <input type="text" class="form-control" name="dusun" id="dusun" placeholder="Masukkan Dusun Tempat Tinggal">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="rt" class="control-label" style="font-weight:bold">RT</label>
-            <input type="number" class="form-control" name="rt" id="rt" placeholder="Masukkan RT Tempat Tinggal">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="rw" class="control-label" style="font-weight:bold">RW</label>
-            <input type="number" class="form-control" name="rw" id="rw" placeholder="Masukkan RW Tempat Tinggal">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="pend_terakhir" class="control-label" style="font-weight:bold">Pendidikan Terakhir</label>
-            <input type="text" class="form-control" name="pend_terakhir" id="pend_terakhir" placeholder="Masukkan Pendidikan Terakhir">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="pend_skrg" class="control-label" style="font-weight:bold">Pendidikan Saat Ini</label>
-            <input type="text" class="form-control" name="pendidikan_skrg" id="pendidikan_skrg" placeholder="Masukkan Pendidikan Saat Ini">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="pekerjaan" class="control-label" style="font-weight:bold">Pekerjaan</label>
-            <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" placeholder="Masukkan Pekerjaan Sesuai KTP">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="tgl_lahir" class="control-label" style="font-weight:bold">Tanggal Lahir</label>
-            <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="tempat_lahir" class="control-label" style="font-weight:bold">Tempat Lahir</label>
-            <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" placeholder="Masukkan Tempat Lahir">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="kawin" class="control-label" style="font-weight:bold">Kawin</label>
-            <input type="text" class="form-control" name="kawin" id="kawin" placeholder="Masukkan Status Perkawinan">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="hub_keluarga" class="control-label" style="font-weight:bold">Hubungan Keluarga</label>
-            <input type="text" class="form-control" name="hub_keluarga" id="hub_keluarga" placeholder="Masukkan Hubungan Keluarga Dalam KK">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="goldar" class="control-label" style="font-weight:bold">Golongan Darah</label>
-            <input type="text" class="form-control" name="goldar" id="goldar" placeholder="Masukkan Golongan Darah">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="nama_ayah" class="control-label" style="font-weight:bold">Nama Ayah</label>
-            <input type="text" class="form-control" name="nama_ayah" id="nama_ayah" placeholder="Masukkan Nama Ayah">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="nama_ibu" class="control-label" style="font-weight:bold">Nama Ibu</label>
-            <input type="text" class="form-control" name="nama_ibu" id="nama_ibu" placeholder="Masukkan Nama Ibu">
-          </div>
-          <div class="form-group col-md-12 mt-2">
-            <label for="status" class="control-label" style="font-weight:bold">Status</label>
-            <input type="text" class="form-control" name="status" id="status" placeholder="Masukkan Status Kependudukan">
-          </div>
-        </form>
-        <div class="col-md-12">
-          <button type="button" class="btn btn-primary" id="btnAddWarga" style="background-color: #3C8DBC; font-weight:bold; width: 100%" onclick="save()">Simpan</button>
-          <button type="button" class="btn btn-primary edit-surat" id="btnEditWarga" style="background-color: #3C8DBC; font-weight:bold; width: 100%">Simpan</button>
-        </div>
+<div class="add" style="display: none">
+  <div class="row">
+    <div class="col-md-3">
+      <button type="button" class="btn btn-primary mb-3" id="btnplus" onclick="back()">
+        <i class="bi bi-chevron-double-left"></i>
+        Kembali
+      </button>
+    </div>
+    <div class="col-md-12">
+      <div class="alert alert-danger d-none">
+        <ul class="message">
+        </ul>
       </div>
     </div>
   </div>
+  <form action="#" method="POST" id="formAdd">
+    @csrf
+    <div class="form-group col-md-12">
+      <label for="nik" class="control-label" style="font-weight:bold">NIK</label>
+      <input type="text" class="form-control" name="nik" id="nik" placeholder="Masukkan NIK">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="nama" class="control-label" style="font-weight:bold">Nama Lengkap</label>
+      <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama Lengkap">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="no_kk" class="control-label" style="font-weight:bold">Nomor KK</label>
+      <input type="text" class="form-control" name="no_kk" id="no_kk" placeholder="Masukkan Nomor Kartu Keluarga">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="dusun" class="control-label" style="font-weight:bold">Dusun</label>
+      <input type="text" class="form-control" name="dusun" id="dusun" placeholder="Masukkan Dusun Tempat Tinggal">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="rt" class="control-label" style="font-weight:bold">RT</label>
+      <input type="number" class="form-control" name="rt" id="rt" placeholder="Masukkan RT Tempat Tinggal">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="rw" class="control-label" style="font-weight:bold">RW</label>
+      <input type="number" class="form-control" name="rw" id="rw" placeholder="Masukkan RW Tempat Tinggal">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="pend_terakhir" class="control-label" style="font-weight:bold">Pendidikan Terakhir</label>
+      <input type="text" class="form-control" name="pend_terakhir" id="pend_terakhir" placeholder="Masukkan Pendidikan Terakhir">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="pend_skrg" class="control-label" style="font-weight:bold">Pendidikan Saat Ini</label>
+      <input type="text" class="form-control" name="pendidikan_skrg" id="pendidikan_skrg" placeholder="Masukkan Pendidikan Saat Ini">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="pekerjaan" class="control-label" style="font-weight:bold">Pekerjaan</label>
+      <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" placeholder="Masukkan Pekerjaan Sesuai KTP">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="tgl_lahir" class="control-label" style="font-weight:bold">Tanggal Lahir</label>
+      <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="tempat_lahir" class="control-label" style="font-weight:bold">Tempat Lahir</label>
+      <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" placeholder="Masukkan Tempat Lahir">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="kawin" class="control-label" style="font-weight:bold">Kawin</label>
+      {{-- <input type="text" class="form-control" name="kawin" id="kawin" placeholder="Masukkan Status Perkawinan"> --}}
+      <select name="kawin" id="kawin" class="form-control">
+        <option value="0" selected disabled>Pilih Status Perkawinan</option>
+        @foreach ($data2 as $kawin)
+            <option value="{{ $kawin->kawin }}">{{ $kawin->kawin }}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="hub_keluarga" class="control-label" style="font-weight:bold">Hubungan Keluarga</label>
+      {{-- <input type="text" class="form-control" name="hub_keluarga" id="hub_keluarga" placeholder="Masukkan Hubungan Keluarga Dalam KK"> --}}
+      <select name="hub_keluarga" id="hub_keluarga" class="form-control">
+        <option value="0" selected disabled>Pilih Hubungan Dalam Keluarga</option>
+        @foreach ($data1 as $hk)
+            <option value="{{ $hk->hub_keluarga }}">{{ $hk->hub_keluarga }}</option>
+        @endforeach
+      </select>
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="goldar" class="control-label" style="font-weight:bold">Golongan Darah</label>
+      {{-- <input type="text" class="form-control" name="goldar" id="goldar" placeholder="Masukkan Golongan Darah"> --}}
+      <select name="goldar" id="godar" class="form-control">
+        <option value="0" selected disabled>Pilih Golongan Darah</option>
+        <option value="-">Belum Tahu</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="AB">AB</option>
+        <option value="O">O</option>
+      </select>
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="nama_ayah" class="control-label" style="font-weight:bold">Nama Ayah</label>
+      <input type="text" class="form-control" name="nama_ayah" id="nama_ayah" placeholder="Masukkan Nama Ayah">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="nama_ibu" class="control-label" style="font-weight:bold">Nama Ibu</label>
+      <input type="text" class="form-control" name="nama_ibu" id="nama_ibu" placeholder="Masukkan Nama Ibu">
+    </div>
+    <div class="form-group col-md-12 mt-2">
+      <label for="status" class="control-label" style="font-weight:bold">Status</label>
+      <input type="text" class="form-control" name="status" id="status" placeholder="Masukkan Status Kependudukan">
+    </div>
+  </form>
+  <div class="col-md-12">
+    <button type="button" class="btn btn-primary mb-3" id="btnAddWarga" style="background-color: #3C8DBC; font-weight:bold; width: 100%" onclick="save()">Simpan</button>
+    {{-- <button type="button" class="btn btn-primary edit-surat" id="btnEditWarga" style="background-color: #3C8DBC; font-weight:bold; width: 100%">Simpan</button> --}}
+  </div>
 </div>
+
+
+{{-- ADD WARGA --}}
+
 
 {{-- IMPORT EXCEL --}}
 <div class="modal fade" id="modalImport" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -203,10 +233,20 @@
   });
 
   function add(){
-    $('#modalAdd').modal('show');
+    $('.alert-danger').addClass('d-none');
+    // $('#modalAdd').modal('show');
+    $('#page-title').html('Tambah Data Warga');
+    $('.add').show();
+    $('.index').hide();
     $('#formAdd')[0].reset();
     $('#btnEditWarga').hide();
     $('#btnAddWarga').show();
+  }
+
+  function back(){
+    $('#page-title').html('Data Warga');
+    $('.add').hide();
+    $('.index').show();
   }
 
   function excel(){
@@ -234,21 +274,22 @@
       },
 
       success: function(response){
-        if(response.status = 'success'){
+        if(response.success){
           Swal.fire({
             icon: 'success',
             title: 'Data Berhasil Ditambahkan!',
             showConfirmButton: false,
             timer: 1500
           });
-          modalAdd.modal('hide');
+          // modalAdd.modal('hide');
+          $('.add').hide();
+          $('.index').show();
           $('#tablewarga').DataTable().ajax.reload();
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Data Gagal Ditambahkan!',
-            showConfirmButton: false,
-            timer: 1500
+          $('.message').empty();
+          $('.alert-danger').removeClass('d-none');
+          $.each(response.error, function(key,value){
+            $('.message').append("<li>" + value + "</li>")
           });
         }
       }
@@ -275,17 +316,24 @@
 
       success: function(response){
         $('#modalAdd').modal('show');
+        $('.alert-danger').addClass('d-none');
         $('#nik').val(response.nik);
         $('#nama').val(response.nama_lengkap);
-        $('#tempat').val(response.tempat_lahir);
-        $('#tanggal').val(response.tgl_lahir);
-        $("#jk option[value=" + '"' + response.jk + '"' + "]").attr("selected", "selected");
+        $('#no_kk').val(response.no_kk);
+        $('#tempat_lahir').val(response.tempat_lahir);
+        $('#tgl_lahir').val(response.tgl_lahir);
         $("#goldar option[value=" + '"' + response.goldar + '"' + "]").attr("selected", "selected");
-        $('#alamat').val(response.alamat);
-        $('#agama').val(response.agama);
-        $("#kawin option[value=" + '"' + response.sp + '"' + "]").attr("selected", "selected");
+        $('#rt').val(response.rt);
+        $('#rw').val(response.rw);
+        $('#dusun').val(response.dusun);
+        $("#kawin option[value=" + '"' + response.kawin + '"' + "]").attr("selected", "selected");
+        $("#hub_keluarga option[value=" + '"' + response.hub_keluarga + '"' + "]").attr("selected", "selected");
         $('#pekerjaan').val(response.pekerjaan);
-        $("#kwn option[value=" + '"' + response.kwn + '"' + "]").attr("selected", "selected");
+        $('#pend_terakhir').val(response.pendidikan);
+        $('#pendidikan_skrg').val(response.pendidikan_ditempuh);
+        $('#nama_ayah').val(response.nama_ayah);
+        $('#nama_ibu').val(response.nama_ibu);
+        $('#status').val(response.status);
 
         $('#btnEditWarga').click(function(){
           saveedit(id);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surat;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,7 +15,13 @@ class AdminController extends Controller
 
     public function warga()
     {
-        return view('admin.warga');
+        $warga = new Warga;
+        $hub_keluarga = $warga->hub_keluarga();
+        $kawin = $warga->kawin();
+
+        return view('admin.warga')
+            ->with('data1', $hub_keluarga)
+            ->with('data2', $kawin);
     }
 
     public function surat()

@@ -8,6 +8,13 @@
         Tambah Surat
       </button>
     </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-3 text-end">
+      <a href="tutorial/Tata-Cara-Input-Surat.pdf" class="btn btn-success mb-3">
+        <i class="bi bi-info-circle"></i>
+        Tata Cara Input Surat
+      </a>
+    </div>
   </div>
   <div class="table-responsive">
     <table class="table table-striped table-sm" id="tablesurat" style="width: 100%">

@@ -34,4 +34,16 @@ class Warga extends Model
         $data = DB::table('warga')->get();
         return $data;
     }
+
+    public function hub_keluarga()
+    {
+        $data = DB::table('warga')->select('hub_keluarga')->groupBy('hub_keluarga')->get();
+        return $data;
+    }
+
+    public function kawin()
+    {
+        $data = DB::table('warga')->select('kawin')->groupBy('kawin')->get();
+        return $data;
+    }
 }

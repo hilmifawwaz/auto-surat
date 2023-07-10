@@ -14,7 +14,7 @@ class Surat extends Model
 
     public function index()
     {
-        $data = DB::table('surat')->get();
+        $data = DB::table('surat')->where('status', 'aktif')->get();
         return $data;
     }
 }
