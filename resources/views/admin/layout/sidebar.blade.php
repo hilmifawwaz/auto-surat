@@ -25,12 +25,12 @@
           Data Pengumuman
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a class="nav-link" href="/data-wilayah" id="btnwilayah">
           <span data-feather="map-pin"></span>
           Data Wilayah
         </a>
-      </li>
+      </li> --}}
       <li class="nav-link">
         <form action="/logout" method="POST" class="text-left">
           @csrf
